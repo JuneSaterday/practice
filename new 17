@@ -1,0 +1,421 @@
+<div class="panel panel-default fold"
+                 ng-show="omsOrder.businessType=='EXPORT'||omsOrder.businessType=='IMPORT'">
+                <div class="panel-heading" role="tab" id="heading-F0-0-5-1"><h4 class="panel-title"><a role="button"
+                                                                                                       data-toggle="collapse"
+                                                                                                       style="display:block;width:100%;height:100%;"
+                                                                                                       data-parent="#accordion"
+                                                                                                       ng-click="initLeftGridWidth('collapse-F0-0-5-1')"
+                                                                                                       href="#collapse-F0-0-5-1"
+                                                                                                       aria-expanded="false"
+                                                                                                       class="collapsed"
+                                                                                                       aria-controls="collapse-F0-0-5-1">出口
+                    / 进口</a></h4></div>
+                <div id="collapse-F0-0-5-1" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading-F0-0-5-1">
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="col-md-0 col-xs-0 col-sm-0 col-lg-0">
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="mblNo"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                主提单号：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <input id="omsOrder.mblNo" name="omsOrder.mblNo"
+                                                       class="input form-control" ng-model="omsOrder.mblNo" type="text"
+                                                       g-focus-select
+                                                       ng-readonly="!(omsOrder.orderStatus!='COMPLETED' && omsOrder.orderStatus!='CANCELLED' && omsOrder.orderStatus!='ONGOING')||pageType=='view'"
+                                                       g-trim g-dbc/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="vesselName"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                船名：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-data-source data-source-name="vesselNameOmsOrderSource"
+                                                               page="true" url="{{$common.ctx}}/mdVessel/query"
+                                                               page-size-param="pageSize"
+                                                               params="queryVesselNameOmsOrderParams"
+                                                               current-page-param="currentPage"
+                                                               total-record-prop="total"
+                                                               records-prop="mdVessels"
+                                                               allow-auto-load="false">
+                                                </g-data-source>
+                                                <g-associate g-focus-select
+                                                             show-event="click"
+                                                             name="omsOrder.vesselName"
+
+
+                                                             match-prop="vesselAliasCode"
+                                                             unmatch-remove="true"
+                                                             space-clear="true"
+                                                             ng-cloak ng-disabled="pageType=='view'"
+
+                                                             data-source-name="vesselNameOmsOrderSource"
+                                                             selected-row="vesselNameOmsOrderSelectedRow"
+                                                             keyword="search_vesselName" g-trim g-dbc
+
+
+                                                             setting-name="MD_VESSELShlpSetting"
+
+                                                             on-select="
+                    "
+                                                             ng-model="omsOrder.vesselNameEn"
+                                                             display-init="omsOrder.vesselName"
+                                                             value-prop="vesselNameEn
+                    " display-express="vesselNameCn" keyword-prop="vesselNameCn"
+
+                                                >
+                                                </g-associate>
+                                                <input g-data-bind="vesselNameOmsOrderSelectedRow"
+
+                                                       value-prop="vesselNameCn"
+                                                       ng-model="omsOrder.vesselName" type="hidden"/>
+                                                <input g-data-bind="vesselNameOmsOrderSelectedRow"
+
+                                                       value-prop="vesselCode"
+                                                       ng-model="omsOrder.vesselCode" type="hidden"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="voyage"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                航次：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <input id="omsOrder.voyage" name="omsOrder.voyage"
+                                                       class="input form-control" ng-model="omsOrder.voyage" type="text"
+                                                       g-focus-select ng-readonly="pageType=='view'" g-trim g-dbc/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="vesselDate"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                船期：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-date g-focus-select name="omsOrder.vesselDate"
+                                                        ng-model="omsOrder.vesselDate" format="yyyy-MM-dd"
+                                                        ng-disabled="(!(omsOrder.orderStatus!='CANCELLED' && omsOrder.orderStatus!='TERMINATED'))||pageType=='view'"></g-date>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="carrierName"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                船公司名称：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-data-source data-source-name="carrierNameOmsOrderSource"
+                                                               page="true" url="{{$common.ctx}}/mdShipowner/query"
+                                                               page-size-param="pageSize"
+                                                               params="queryCarrierNameOmsOrderParams"
+                                                               current-page-param="currentPage"
+                                                               total-record-prop="total"
+                                                               records-prop="mdShipowners"
+                                                               allow-auto-load="false">
+                                                </g-data-source>
+                                                <g-associate g-focus-select
+                                                             show-event="click"
+                                                             name="omsOrder.carrierName"
+
+
+                                                             unmatch-remove="true"
+                                                             space-clear="true"
+                                                             ng-cloak ng-disabled="pageType=='view'"
+
+                                                             data-source-name="carrierNameOmsOrderSource"
+                                                             selected-row="carrierNameOmsOrderSelectedRow"
+                                                             keyword="search_carrierName" g-trim g-dbc
+
+
+                                                             setting-name="MD_SHIPOWNERShlpSetting"
+
+                                                             on-select="
+                    "
+                                                             ng-model="omsOrder.carrierCode"
+                                                             display-init="omsOrder.carrierName"
+                                                             value-prop="shipowner
+                    " display-express="shipownerNameEn" keyword-prop="shipownerNameEn"
+
+                                                >
+                                                </g-associate>
+                                                <input g-data-bind="carrierNameOmsOrderSelectedRow"
+
+                                                       value-prop="shipownerNameEn"
+                                                       ng-model="omsOrder.carrierName" type="hidden"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="transPortName"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                中转港名称：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-data-source data-source-name="transPortNameOmsOrderSource"
+                                                               page="true" url="{{$common.ctx}}/mdPort/query"
+                                                               page-size-param="pageSize"
+                                                               params="queryTransPortNameOmsOrderParams"
+                                                               current-page-param="currentPage"
+                                                               total-record-prop="total"
+                                                               records-prop="mdPorts"
+                                                               allow-auto-load="false">
+                                                </g-data-source>
+                                                <g-associate g-focus-select
+                                                             show-event="click"
+                                                             name="omsOrder.transPortName"
+
+
+                                                             unmatch-remove="true"
+                                                             space-clear="true"
+                                                             ng-cloak ng-disabled="pageType=='view'"
+
+                                                             data-source-name="transPortNameOmsOrderSource"
+                                                             selected-row="transPortNameOmsOrderSelectedRow"
+                                                             keyword="search_transPortName" g-trim g-dbc
+
+
+                                                             setting-name="MD_PORT_ZHONGZHUANShlpSetting"
+
+                                                             on-select="
+                    "
+                                                             ng-model="omsOrder.transPortCode"
+                                                             display-init="omsOrder.transPortName"
+                                                             value-prop="port5code
+                    " display-express="port5code" keyword-prop="port5code"
+
+                                                >
+                                                </g-associate>
+                                                <input g-data-bind="transPortNameOmsOrderSelectedRow"
+
+                                                       value-prop="port5code"
+                                                       ng-model="omsOrder.transPortName" type="hidden"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="destPortName"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                目的港名称：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-data-source data-source-name="destPortNameOmsOrderSource"
+                                                               page="true" url="{{$common.ctx}}/mdPort/query"
+                                                               page-size-param="pageSize"
+                                                               params="queryDestPortNameOmsOrderParams"
+                                                               current-page-param="currentPage"
+                                                               total-record-prop="total"
+                                                               records-prop="mdPorts"
+                                                               allow-auto-load="false">
+                                                </g-data-source>
+                                                <g-associate g-focus-select
+                                                             show-event="click"
+                                                             name="omsOrder.destPortName"
+
+
+                                                             unmatch-remove="true"
+                                                             space-clear="true"
+                                                             ng-cloak ng-disabled="pageType=='view'"
+
+                                                             data-source-name="destPortNameOmsOrderSource"
+                                                             selected-row="destPortNameOmsOrderSelectedRow"
+                                                             keyword="search_destPortName" g-trim g-dbc
+
+
+                                                             setting-name="MD_PORT_LIANXIANGShlpSetting"
+
+                                                             on-select="
+                    "
+                                                             ng-model="omsOrder.destPortCode"
+                                                             display-init="omsOrder.destPortName"
+                                                             value-prop="portCode
+                    " display-express="portNameEn" keyword-prop="portNameEn"
+
+                                                >
+                                                </g-associate>
+                                                <input g-data-bind="destPortNameOmsOrderSelectedRow"
+
+                                                       value-prop="portNameEn"
+                                                       ng-model="omsOrder.destPortName" type="hidden"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="startPortTime"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                开港时间：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-date g-focus-select name="omsOrder.startPortTime"
+                                                        ng-model="omsOrder.startPortTime" format="yyyy-MM-dd HH:mm"
+                                                        ng-disabled="!(omsOrder.orderStatus!='CANCELLED' && omsOrder.orderStatus!='TERMINATED')||pageType=='view'"></g-date>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="endPortTime"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                截港时间：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-date g-focus-select name="omsOrder.endPortTime"
+                                                        ng-model="omsOrder.endPortTime" format="yyyy-MM-dd HH:mm"
+                                                        ng-disabled="!(omsOrder.orderStatus!='CANCELLED' && omsOrder.orderStatus!='TERMINATED')||pageType=='view'"></g-date>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 col-sm-3 col-lg-3">
+
+
+                                        <div class="form-group form-group-padding">
+                                            <label for="inPortName"
+                                                   class="col-md-4 col-xs-4 col-sm-4 col-lg-4 control-label">
+
+
+                                                进港点名称：
+                                            </label>
+                                            <div class="col-md-8 col-xs-8  col-sm-8 col-lg-8 ">
+
+
+                                                <g-data-source data-source-name="inPortNameOmsOrderSource"
+                                                               page="true" url="{{$common.ctx}}/mdPort/query"
+                                                               page-size-param="pageSize"
+                                                               params="queryInPortNameOmsOrderParams"
+                                                               current-page-param="currentPage"
+                                                               total-record-prop="total"
+                                                               records-prop="mdPorts"
+                                                               allow-auto-load="false">
+                                                </g-data-source>
+                                                <g-associate g-focus-select
+                                                             show-event="click"
+                                                             name="omsOrder.inPortName"
+
+
+                                                             unmatch-remove="true"
+                                                             space-clear="true"
+                                                             ng-cloak ng-disabled="pageType=='view'"
+
+                                                             data-source-name="inPortNameOmsOrderSource"
+                                                             selected-row="inPortNameOmsOrderSelectedRow"
+                                                             keyword="search_inPortName" g-trim g-dbc
+
+
+                                                             setting-name="MD_PORT_TIKONGShlpSetting"
+
+                                                             on-select="
+                    "
+                                                             ng-model="omsOrder.inPortCode"
+                                                             display-init="omsOrder.inPortName"
+                                                             value-prop="portCode
+                    " display-express="portNameEn" keyword-prop="portNameEn"
+
+                                                >
+                                                </g-associate>
+                                                <input g-data-bind="inPortNameOmsOrderSelectedRow"
+
+                                                       value-prop="portNameEn"
+                                                       ng-model="omsOrder.inPortName" type="hidden"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
